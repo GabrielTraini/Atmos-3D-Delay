@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="LGZrKw" name="Atmos3DDelay" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="1" displaySplashScreen="1" jucerFormatVersion="1"
+              pluginManufacturer="A. Asyraf" companyName="TheGLab" pluginAAXCategory="1"
+              pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn">
+  <MAINGROUP id="GYHyR4" name="Atmos3DDelay">
+    <GROUP id="{C65BE475-88B4-3C13-A2D0-C64CC54C72C4}" name="Resources">
+      <FILE id="ZhK7Yf" name="background.png" compile="0" resource="1" file="background.png"/>
+    </GROUP>
+    <GROUP id="{433645AA-1E70-4A94-1E30-B90D0CDC17EB}" name="Source">
+      <FILE id="cA0fz8" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="a1vmRg" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="aU3yzJ" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="D7p1lR" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="PingPongDelay"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Atmos3DDelay"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../../../JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+    <VS2019 targetFolder="Builds/VisualStudio2019">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Atmos3DDelay"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_devices" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_formats" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_processors" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_utils" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_core" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_data_structures" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_dsp" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_events" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_graphics" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_gui_basics" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+        <MODULEPATH id="juce_gui_extra" path="C:\Users\gabgi\Downloads\juce-7.0.5-windows\JUCE\modules"/>
+      </MODULEPATHS>
+    </VS2019>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>
