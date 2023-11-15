@@ -1,3 +1,5 @@
-This repository houses the JUCER file and Source Code to the Atmos 3D Delay Plugin. Please contact the author if any issue persists at
+Dissertation Project: Multichannel VST Plugin (Atmo-3D-Delay)
 
-Email: gabgiel97@gmail.com
+Author: Gabriel Traini
+
+Note: VST File is built under the Products folder.
