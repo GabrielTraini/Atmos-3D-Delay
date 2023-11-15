@@ -35,12 +35,12 @@ public:
     unique_ptr<AudioProcessorValueTreeState::SliderAttachment> mixVal;              // Attachment for Delay Mix Value
     unique_ptr<AudioProcessorValueTreeState::SliderAttachment> feedbackVal;         // Attachment for Feedback Value
     unique_ptr<AudioProcessorValueTreeState::SliderAttachment> balanceVal;         // Attachment for Balance Value
+    unique_ptr<AudioProcessorValueTreeState::SliderAttachment> offsetVal;
 
     unique_ptr<AudioProcessorValueTreeState::SliderAttachment> lowpassVal;          // Attachment for Low Pass Value
     unique_ptr<AudioProcessorValueTreeState::SliderAttachment> highpassVal;          // Attachment for Low Pass Value
 
     unique_ptr<AudioProcessorValueTreeState::SliderAttachment> outputGainVal;       // Attachment for Output Gain
-    unique_ptr<AudioProcessorValueTreeState::SliderAttachment> offsetVal;;
     unique_ptr<AudioProcessorValueTreeState::ComboBoxAttachment> delayOptVal;          // Attachment for Delay Option Value
 
 private:
@@ -62,6 +62,9 @@ private:
     Slider      outputGainSlider;       // Slider for Output Gain
 
     ComboBox    delayOptions;       // Options of Delay
+
+    Label       balanceText;
+    Label       offsetText;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Atmos3DDelayAudioProcessorEditor)
 };

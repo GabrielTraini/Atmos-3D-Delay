@@ -46,6 +46,7 @@ public:
     void outputGainControl(AudioBuffer<float>& buffer);
 
     //Functions for Delay Processing
+    void MidSideDelay(AudioBuffer<float>& buffer, int localWritePosition);
     void PingPongDelay(AudioBuffer<float>& buffer, int localWritePosition);
     void SlapBackDelay(AudioBuffer<float>& buffer, int localWritePosition);
 
@@ -83,7 +84,7 @@ private:
     // Variables
     float                       startGain, finalGain, lastSampleRate{48000};
     int                         delayBufferSamples, delayBufferChannels, delayWritePosition;
-    int delayBuffer0Channels, delayBuffer0Samples;
+    int                         delayBuffer0Channels, delayBuffer0Samples;
     AudioSampleBuffer           delayBuffer;
     AudioSampleBuffer           delayBuffer0;
 

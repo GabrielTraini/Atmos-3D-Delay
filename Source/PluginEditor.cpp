@@ -20,7 +20,6 @@ Atmos3DDelayAudioProcessorEditor::Atmos3DDelayAudioProcessorEditor(Atmos3DDelayA
     // editor's size to whatever you need it to be.
     buildElements();
 
-
     setSize(1000, 500);
 
     startTimerHz(60);
@@ -28,6 +27,7 @@ Atmos3DDelayAudioProcessorEditor::Atmos3DDelayAudioProcessorEditor(Atmos3DDelayA
 
 Atmos3DDelayAudioProcessorEditor::~Atmos3DDelayAudioProcessorEditor()
 {
+    stopTimer();
 }
 
 //==============================================================================
@@ -55,10 +55,8 @@ void Atmos3DDelayAudioProcessorEditor::paint (juce::Graphics& g)
 
     //// Delay Time and Mix and Feedback
     g.drawText("Delay Time",        130, 435,    200, 50, Justification::centred, false);
-    g.drawText("Mix",               260, 435,    200, 50, Justification::centred, false);
-    g.drawText("Feedback",          390, 435,    200, 50, Justification::centred, false);
-    g.drawText("Balance",           150, 265,   200, 50, Justification::centred, false);
-    g.drawText("Offset",            360, 265,   200, 50, Justification::centred, false);
+    g.drawText("Feedback",          260, 435,    200, 50, Justification::centred, false);
+    g.drawText("Mix",               390, 435,    200, 50, Justification::centred, false);
 
     //// Low Pass
     g.drawText("High Cut",          720, 430,    200, 50, Justification::centred, false);
@@ -72,20 +70,35 @@ void Atmos3DDelayAudioProcessorEditor::paint (juce::Graphics& g)
     //// Output Gain
     g.drawText("Output Gain",       550, 430, 200, 50, Justification::centred, false);
 
+
+    if (delayOptions.getSelectedId() == 1)
+    {
+        balanceSlider.setVisible(true);
+        offsetKnob.setVisible(true);
+
+        balanceText.setVisible(true);
+        offsetText.setVisible(true);
+    }
+    else if (delayOptions.getSelectedId() == 2)
+    {
+        balanceSlider.setVisible(false);
+        offsetKnob.setVisible(false);
+
+        balanceText.setVisible(false);
+        offsetText.setVisible(false);
+    }
+    else if (delayOptions.getSelectedId() == 3)
+    {
+        balanceSlider.setVisible(false);
+        offsetKnob.setVisible(true);
+
+        balanceText.setVisible(false);
+        offsetText.setVisible(true);
+    }
+
     // Title of PlugIn
     g.setFont(35.0f);
-    g.drawText("Atmos 3D-Delay",    125, 20, 1160, 75, Justification::centred, false);
-
-    //if (delayOptions.getSelectedId() == 1)
-    //{
-    //    balanceSlider.setVisible(true);
-    //    offsetKnob.setVisible(true);
-    //}
-    //else if (delayOptions.getSelectedId() == 2)
-    //{
-    //    balanceSlider.setVisible(false);
-    //    offsetKnob.setVisible(false);
-    //}
+    g.drawText("Atmos 3D-Delay", 125, 20, 1160, 75, Justification::centred, false);
 }
 
 void Atmos3DDelayAudioProcessorEditor::resized()
@@ -111,6 +124,9 @@ void Atmos3DDelayAudioProcessorEditor::resized()
     // Output Gain Slider
     outputGainSlider.setBounds  (580, 160, 150, 275);
 
+    // Labels for Balance and Offset
+    balanceText.setBounds(160, 265, 200, 50);
+    offsetText.setBounds(355, 265, 200, 50);
 }
 
 void Atmos3DDelayAudioProcessorEditor::timerCallback()
@@ -120,13 +136,12 @@ void Atmos3DDelayAudioProcessorEditor::timerCallback()
 
 void Atmos3DDelayAudioProcessorEditor::buildElements()
 {
-
-
     delayOptVal = make_unique<AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.parameters, "delay_option", delayOptions);
     delayOptions.setEditableText(false);
     delayOptions.addItem("Ping-Pong", 1);
     delayOptions.addItem("Normal", 2);
-    delayOptions.setSelectedId(1);
+    delayOptions.addItem("MidSide", 3);
+    delayOptions.setSelectedId(1, dontSendNotification);
     addAndMakeVisible(&delayOptions);
 
     //Building the Input Gain
@@ -149,9 +164,14 @@ void Atmos3DDelayAudioProcessorEditor::buildElements()
     offsetKnob.setSliderStyle(Slider::SliderStyle::RotaryHorizontalDrag);
     offsetKnob.setTextBoxStyle(Slider::TextBoxBelow, false, 100, 20);
     offsetKnob.setTextValueSuffix(" s");
-    offsetKnob.setRange(-0.5f, 0.5f);
-    //addChildComponent(&offsetKnob);
-    addAndMakeVisible(&offsetKnob);
+    offsetKnob.setRange(-1.0f, 1.0f);
+    addChildComponent(&offsetKnob);
+
+    offsetText.setFont(18.0f);
+    offsetText.setText("Offset", dontSendNotification);
+    offsetText.setColour(Label::textColourId, Colours::white);
+    offsetText.setJustificationType(Justification::centred);
+    addAndMakeVisible(&offsetText);
 
     //Building the Mix Knob
     mixVal = make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.parameters, "mix", mixKnob);
@@ -172,8 +192,14 @@ void Atmos3DDelayAudioProcessorEditor::buildElements()
     balanceSlider.setSliderStyle(Slider::SliderStyle::RotaryHorizontalDrag);
     balanceSlider.setTextBoxStyle(Slider::TextBoxBelow, false, 100, 20);
     balanceSlider.setRange(0.0f, 1.0f);
-    //addChildComponent(&balanceSlider);
-    addAndMakeVisible(&balanceSlider);
+    addChildComponent(&balanceSlider);
+
+    balanceText.setFont(18.0f);
+    balanceText.setText("Balance", dontSendNotification);
+    balanceText.setColour(Label::textColourId, Colours::white);
+    balanceText.setJustificationType(Justification::centred);
+    addAndMakeVisible(&balanceText);
+
 
     //Building the Low Pass Slider
     lowpassVal = make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.parameters, "lowpass", highCutSlider);
@@ -186,7 +212,7 @@ void Atmos3DDelayAudioProcessorEditor::buildElements()
     highpassVal = make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.parameters, "highpass", lowCutSlider);
     lowCutSlider.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     lowCutSlider.setTextBoxStyle(Slider::TextBoxBelow, false, 100, 20);
-    lowCutSlider.setRange(50.0f, 20000.0f); lowCutSlider.setTextValueSuffix(" Hz");
+    lowCutSlider.setRange(50.0f, 15000.0f); lowCutSlider.setTextValueSuffix(" Hz");
     addAndMakeVisible(&lowCutSlider);
 
     //Building the Output Gain
